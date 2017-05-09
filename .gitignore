@@ -1,0 +1,9 @@
+node_modules
+
+# compiled files
+lib
+
+# os files
+# windows files
+Thumbs.db
+.DS_Store
