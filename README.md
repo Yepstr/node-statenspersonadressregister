@@ -25,7 +25,7 @@ openssl pkcs12 -in cert.p12 -clcerts -nodes -out cert.crt
 
 ## Usage
 
-Make sure your project depend on `@yepstr/node-statenspersonadressregister` and then:
+Make sure your project depend on `node-statenspersonadressregister` and then:
 
 ```
 import SPAR from 'spar';
