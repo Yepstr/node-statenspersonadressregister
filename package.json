@@ -6,19 +6,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src -d lib",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "lint": "eslint src"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "fs-promise": "0.4.1",
-    "moment": "^2.11.1",
+    "moment": "^2.18.1",
     "node-libcurl": "0.7.0",
-    "request": "2.81.0",
-    "soap": "0.19.0",
+    "request": "^2.81.0",
+    "soap": "^0.19.1",
     "xml": "^1.0.1",
     "xmldom": "^0.1.22",
-    "xpath": "^0.0.21"
+    "xpath": "^0.0.24"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",

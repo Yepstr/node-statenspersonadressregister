@@ -1,19 +1,14 @@
-import xpath from 'xpath';
 import xml from 'xml';
 import moment from 'moment';
 
 class XMLFormatter {
-  constructor() {
-
-  }
-
   formatPersonsokningFraga(fysiskPersonId, kundNr, orgNr, slutAnvandarId) {
     const searchData = {
       'spain:SPARPersonsokningFraga': [
         { '_attr': { 'xmlns:spain': 'http://skatteverket.se/spar/instans/1.0' } },
         this._formatSPARIdentity(kundNr, orgNr, slutAnvandarId),
         this._formatSPARPersonsokningFraga(fysiskPersonId),
-      ]
+      ],
     };
 
     return this._formatSPAREnvelope(searchData);
@@ -30,9 +25,9 @@ class XMLFormatter {
         { 'spako:KundNrSlutkund': kundNr },
         { 'spako:OrgNrSlutkund': orgNr },
         { 'spako:SlutAnvandarId': slutAnvandarId },
-        { 'spako:Tidsstampel': moment().format('YYYY-MM-DDTHH:mm:ss.SSSS') }
-      ]
-    }
+        { 'spako:Tidsstampel': moment().format('YYYY-MM-DDTHH:mm:ss.SSSS') },
+      ],
+    };
   }
 
   _formatSPARPersonsokningFraga(idNum) {
@@ -43,9 +38,9 @@ class XMLFormatter {
         } },
 
         { 'spako:PersonId': [
-          { 'spako:FysiskPersonId': idNum }
-        ]}
-      ]
+          { 'spako:FysiskPersonId': idNum },
+        ]},
+      ],
     };
   }
 
@@ -55,10 +50,10 @@ class XMLFormatter {
         { '_attr': {
           'xmlns:SOAP-ENV': 'http://schemas.xmlsoap.org/soap/envelope/',
           'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
-          'SOAP-ENV:encodingStyle': 'http://schemas.xmlsoap.org/soap/encoding/'
+          'SOAP-ENV:encodingStyle': 'http://schemas.xmlsoap.org/soap/encoding/',
         } },
-        { 'SOAP-ENV:Body': [ soapBody ] }
-      ]
+        { 'SOAP-ENV:Body': [soapBody] },
+      ],
     });
   }
 }

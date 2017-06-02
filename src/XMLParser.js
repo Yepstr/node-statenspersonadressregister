@@ -3,11 +3,11 @@ import xpath from 'xpath';
 
 const getDate = (dateStr) => {
   if (dateStr === '9999-12-31') {
-    return undefined;
+    return null;
   }
 
   return dateStr;
-}
+};
 
 /**
  * Given an array of Objects, get the current.
@@ -17,25 +17,27 @@ const getDate = (dateStr) => {
 const getCurrent = (objects) => {
   let current = null;
   objects.some((object) => {
-    if (typeof(object.DatumTom) === 'undefined') {
+    if (object.DatumTom === null) {
       current = object;
+
       return true;
     }
+
     return false;
   });
 
   return current;
-}
+};
 
 /**
  * @param  {String} utdelningsadress
  * @return {{ utdelningsadress, lagenhet }}
  */
-const splitUtdelningsadress = (in_utdelningsadress) => {
+const splitUtdelningsadress = (inUtdelningsadress) => { // esl
   const LGH_REGEX = /\s+(LGH|LÄG)\s+(\d+)/;
   const TR_REGEX = /\s+(\d+)TR/;
 
-  let Utdelningsadress = in_utdelningsadress;
+  let Utdelningsadress = inUtdelningsadress;
   let Lagenhet;
   let Trappor;
 
@@ -54,7 +56,7 @@ const splitUtdelningsadress = (in_utdelningsadress) => {
   }
 
   return { Utdelningsadress, Lagenhet, Trappor };
-}
+};
 
 class XMLParser {
   constructor(namespaces = {}) {
@@ -185,7 +187,7 @@ class XMLParser {
       Utdelningsadress2: splitUtdelningsadress(getString('Utdelningsadress2')),
       PostNr: getString('PostNr'),
       Postort: getString('Postort'),
-    }
+    };
   }
 
   parseUtlandsadress(node) {

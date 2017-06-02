@@ -1,5 +1,4 @@
 import { Curl } from 'node-libcurl';
-import fsp from 'fs-promise';
 
 import XMLParser from './XMLParser';
 import XMLFormatter from './XMLFormatter';
@@ -17,20 +16,20 @@ class SPAR {
   constructor(config, { parser = null, formatter = null } = {}) {
     this.config = Object.assign({}, DEFAULT_CONFIG, config);
 
-    if (parser !== null) {
-      this.parser = parser;
-    } else {
+    if (parser === null) {
       this.parser = new XMLParser({
         'spain': 'http://skatteverket.se/spar/instans/1.0',
         'spako': 'http://skatteverket.se/spar/komponent/1.0',
         'SOAP-ENV': 'http://schemas.xmlsoap.org/soap/envelope/',
       });
+    } else {
+      this.parser = parser;
     }
 
-    if (formatter !== null) {
-      this.formatter = formatter;
-    } else {
+    if (formatter === null) {
       this.formatter = new XMLFormatter();
+    } else {
+      this.formatter = formatter;
     }
   }
 
@@ -53,24 +52,7 @@ class SPAR {
         } else {
           resolve(answer.PersonsokningSvarsPost);
         }
-      })
-    });
-  }
-
-  saveResponse(fysiskPersonId) {
-    const {
-      kundNr,
-      orgNr,
-      slutAnvandarId,
-    } = this.config;
-
-    const searchEnvelope = this.formatter.formatPersonsokningFraga(
-      fysiskPersonId, kundNr, orgNr, slutAnvandarId
-    );
-
-    return this.soapCall(searchEnvelope).then((body) => {
-      const file = `${ __dirname }/../responses/${ fysiskPersonId }.xml`;
-      return fsp.writeFile(file, body);
+      });
     });
   }
 
@@ -99,15 +81,15 @@ class SPAR {
         reject(error);
       });
 
-      curl.on('data', () => {
+      curl.on('data', (...args) => {
         if (verbose) {
-          console.log('DATA', arguments);
+          console.log('DATA', args);
         }
       });
 
-      curl.on('headers', () => {
+      curl.on('headers', (...args) => {
         if (verbose) {
-          console.log('DATA', arguments);
+          console.log('DATA', args);
         }
       });
 
@@ -131,7 +113,7 @@ class SPAR {
     return curl;
   }
 
-  _validateConfig(config) {
+  _validateConfig(/* config */) {
     return true;
   }
 }
