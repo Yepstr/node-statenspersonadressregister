@@ -91,9 +91,9 @@ class XMLParser {
       .map((persondetaljer) => this.parsePersondetaljer(persondetaljer));
     const AktuellPersondetaljer = getCurrent(Persondetaljer);
 
-    const Adress = this.select('//spako:Folkbokforingsadress', personsokningSvarsPostNode)
+    const Folkbokforingsadresser = this.select('//spako:Folkbokforingsadress', personsokningSvarsPostNode)
       .map((address) => this.parseFolkbokforingsadress(address));
-    const AktuellAdress = getCurrent(Adress);
+    const AktuellFolkbokforingsadress = getCurrent(Folkbokforingsadresser);
 
     return {
       PersonId,
@@ -104,8 +104,8 @@ class XMLParser {
 
       Persondetaljer,
       AktuellPersondetaljer,
-      Adress,
-      AktuellAdress,
+      Folkbokforingsadresser,
+      AktuellFolkbokforingsadress,
     };
   }
 
