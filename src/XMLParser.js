@@ -11,13 +11,13 @@ const getDate = (dateStr) => {
 
 /**
  * Given an array of Objects, get the current.
- * It's the one with no `DatumTom`.
+ * It's the one with no `DatumTill`.
  * @return {Object}
  */
 const getCurrent = (objects) => {
   let current = null;
   objects.some((object) => {
-    if (object.DatumTom === null) {
+    if (object.DatumTill === null) {
       current = object;
 
       return true;
@@ -145,7 +145,7 @@ class XMLParser {
 
     return {
       DatumFrom: getDate(getString('DatumFrom')),
-      DatumTom: getDate(getString('DatumTom')),
+      DatumTill: getDate(getString('DatumTill')),
       Fornamn: fornamns,
       Tilltalsnamn: tilltalsnamn,
       Efternamn: getString('Efternamn'),
@@ -172,7 +172,7 @@ class XMLParser {
 
     return {
       DatumFrom: getDate(getString('DatumFrom')),
-      DatumTom: getDate(getString('DatumTom')),
+      DatumTill: getDate(getString('DatumTill')),
       Folkbokforingsadress,
       Utlandsadress,
     };
