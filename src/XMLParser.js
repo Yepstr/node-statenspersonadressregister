@@ -100,7 +100,7 @@ class XMLParser {
 
       Sekretessmarkering: getString('Sekretessmarkering'),
       SekretessAndringsdatum: getDate(getString('SekretessAndringsdatum')),
-      SenasteAndringFolkbokforing: getDate(getString('SenasteAndringFolkbokforing')),
+      SenasteAndringSPAR: getDate(getString('SenasteAndringSPAR')),
 
       Persondetaljer,
       AktuellPersondetaljer,
