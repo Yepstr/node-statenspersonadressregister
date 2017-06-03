@@ -91,8 +91,8 @@ class XMLParser {
       .map((persondetaljer) => this.parsePersondetaljer(persondetaljer));
     const AktuellPersondetaljer = getCurrent(Persondetaljer);
 
-    const Adress = this.select('spako:Adress', personsokningSvarsPostNode)
-      .map((address) => this.parseAddress(address));
+    const Adress = this.select('//spako:Folkbokforingsadress', personsokningSvarsPostNode)
+      .map((address) => this.parseFolkbokforingsadress(address));
     const AktuellAdress = getCurrent(Adress);
 
     return {
@@ -159,29 +159,12 @@ class XMLParser {
     };
   }
 
-  parseAddress(node) {
-    const getString = this._getStringCreator(node);
-
-    const FolkbokforingsadressNodes = this.select('spako:Folkbokforingsadress', node);
-    const UtlandsadressNodes = this.select('spako:Utlandsadress', node);
-
-    const Folkbokforingsadress = FolkbokforingsadressNodes.map(
-      (FolkbokforingsadressNode) => this.parseFolkbokforingsadress(FolkbokforingsadressNode));
-    const Utlandsadress = UtlandsadressNodes.map(
-      (UtlandsadressNode) => this.parseUtlandsadress(UtlandsadressNode));
-
-    return {
-      DatumFrom: getDate(getString('DatumFrom')),
-      DatumTill: getDate(getString('DatumTill')),
-      Folkbokforingsadress,
-      Utlandsadress,
-    };
-  }
-
   parseFolkbokforingsadress(node) {
     const getString = this._getStringCreator(node);
 
     return {
+      DatumFrom: getDate(getString('DatumFrom')),
+      DatumTill: getDate(getString('DatumTill')),
       CareOf: getString('CareOf'),
       DistriktKod: getString('DistriktKod'),
       FolkbokfordKommunKod: getString('FolkbokfordKommunKod'),
