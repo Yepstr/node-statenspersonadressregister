@@ -5,7 +5,7 @@ import XMLFormatter from './XMLFormatter';
 
 const DEFAULT_CONFIG = {
   certPath: '',
-  baseUrl: 'https://kt-ext-ws.statenspersonadressregister.se/spar-webservice/SPARPersonsokningService/20150530',
+  baseUrl: 'https://kt-ext-ws.statenspersonadressregister.se/spar-webservice/SPARPersonsokningService/20160213',
   kundNr: '',
   orgNr: '',
   slutAnvandarId: '',
