@@ -17,11 +17,7 @@ class SPAR {
     this.config = Object.assign({}, DEFAULT_CONFIG, config);
 
     if (parser === null) {
-      this.parser = new XMLParser({
-        'spain': 'http://skatteverket.se/spar/instans/1.0',
-        'spako': 'http://skatteverket.se/spar/komponent/1.0',
-        'SOAP-ENV': 'http://schemas.xmlsoap.org/soap/envelope/',
-      });
+      this.parser = new XMLParser();
     } else {
       this.parser = parser;
     }

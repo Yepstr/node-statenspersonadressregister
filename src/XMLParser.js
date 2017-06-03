@@ -59,7 +59,11 @@ const splitUtdelningsadress = (inUtdelningsadress) => { // esl
 };
 
 class XMLParser {
-  constructor(namespaces = {}) {
+  constructor(namespaces = {
+    'spain': 'http://skatteverket.se/spar/instans/1.0',
+    'spako': 'http://skatteverket.se/spar/komponent/1.0',
+    'SOAP-ENV': 'http://schemas.xmlsoap.org/soap/envelope/',
+  }) {
     this.select = xpath.useNamespaces(namespaces);
   }
 
