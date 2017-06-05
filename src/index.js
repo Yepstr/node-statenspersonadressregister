@@ -5,7 +5,7 @@ import XMLFormatter from './XMLFormatter';
 
 const DEFAULT_CONFIG = {
   certPath: '',
-  baseUrl: 'https://kt-ext-ws.statenspersonadressregister.se/spar-webservice/SPARPersonsokningService/20150530',
+  baseUrl: 'https://kt-ext-ws.statenspersonadressregister.se/spar-webservice/SPARPersonsokningService/20160213',
   kundNr: '',
   orgNr: '',
   slutAnvandarId: '',
@@ -17,11 +17,7 @@ class SPAR {
     this.config = Object.assign({}, DEFAULT_CONFIG, config);
 
     if (parser === null) {
-      this.parser = new XMLParser({
-        'spain': 'http://skatteverket.se/spar/instans/1.0',
-        'spako': 'http://skatteverket.se/spar/komponent/1.0',
-        'SOAP-ENV': 'http://schemas.xmlsoap.org/soap/envelope/',
-      });
+      this.parser = new XMLParser();
     } else {
       this.parser = parser;
     }

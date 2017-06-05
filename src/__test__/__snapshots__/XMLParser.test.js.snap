@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The parser can parse SPAR bodies hejsan 1`] = `
+Object {
+  "PersonsokningSvarsPost": Array [
+    Object {
+      "AktuellFolkbokforingsadress": Object {
+        "CareOf": "",
+        "DatumFrom": "2016-08-30",
+        "DatumTill": null,
+        "DistriktKod": "112042",
+        "FolkbokfordKommunKod": "23",
+        "FolkbokfordLanKod": "06",
+        "Folkbokforingsdatum": "2014-08-25",
+        "PostNr": "59242",
+        "Postort": "Postorten",
+        "Utdelningsadress1": Object {
+          "Lagenhet": undefined,
+          "Trappor": undefined,
+          "Utdelningsadress": "",
+        },
+        "Utdelningsadress2": Object {
+          "Lagenhet": "1234",
+          "Trappor": undefined,
+          "Utdelningsadress": "GATAN 123",
+        },
+      },
+      "AktuellPersondetaljer": Object {
+        "Aviseringsnamn": "",
+        "Avregistreringsdatum": "",
+        "AvregistreringsorsakKod": "",
+        "DatumFrom": "2009-09-10",
+        "DatumTill": null,
+        "Efternamn": "Efternamn",
+        "Fodelsetid": "1989-04-07",
+        "Fornamn": Array [
+          "Fornamn",
+          "Tilltalsnamn",
+        ],
+        "HanvisningspersonNrByttFran": "",
+        "HanvisningspersonNrByttTill": "",
+        "Kon": "M",
+        "Tilltalsnamn": "Tilltalsnamn",
+      },
+      "Folkbokforingsadresser": Array [
+        Object {
+          "CareOf": "",
+          "DatumFrom": "2016-08-30",
+          "DatumTill": null,
+          "DistriktKod": "112042",
+          "FolkbokfordKommunKod": "23",
+          "FolkbokfordLanKod": "06",
+          "Folkbokforingsdatum": "2014-08-25",
+          "PostNr": "59242",
+          "Postort": "Postorten",
+          "Utdelningsadress1": Object {
+            "Lagenhet": undefined,
+            "Trappor": undefined,
+            "Utdelningsadress": "",
+          },
+          "Utdelningsadress2": Object {
+            "Lagenhet": "1234",
+            "Trappor": undefined,
+            "Utdelningsadress": "GATAN 123",
+          },
+        },
+        Object {
+          "CareOf": "",
+          "DatumFrom": "2016-01-05",
+          "DatumTill": "2016-08-30",
+          "DistriktKod": "39203",
+          "FolkbokfordKommunKod": "17",
+          "FolkbokfordLanKod": "04",
+          "Folkbokforingsdatum": "2014-08-25",
+          "PostNr": "18204",
+          "Postort": "Staden",
+          "Utdelningsadress1": Object {
+            "Lagenhet": undefined,
+            "Trappor": undefined,
+            "Utdelningsadress": "",
+          },
+          "Utdelningsadress2": Object {
+            "Lagenhet": undefined,
+            "Trappor": "2",
+            "Utdelningsadress": "ANDRA GATAN 567",
+          },
+        },
+        Object {
+          "CareOf": "",
+          "DatumFrom": "2014-08-26",
+          "DatumTill": "2016-01-05",
+          "DistriktKod": "",
+          "FolkbokfordKommunKod": "11",
+          "FolkbokfordLanKod": "04",
+          "Folkbokforingsdatum": "2014-08-25",
+          "PostNr": "24813",
+          "Postort": "PLATSEN",
+          "Utdelningsadress1": Object {
+            "Lagenhet": undefined,
+            "Trappor": undefined,
+            "Utdelningsadress": "",
+          },
+          "Utdelningsadress2": Object {
+            "Lagenhet": undefined,
+            "Trappor": "2",
+            "Utdelningsadress": "VÄGEN 2",
+          },
+        },
+        Object {
+          "CareOf": "",
+          "DatumFrom": "2011-02-09",
+          "DatumTill": "2014-08-26",
+          "DistriktKod": "",
+          "FolkbokfordKommunKod": "98",
+          "FolkbokfordLanKod": "25",
+          "Folkbokforingsdatum": "2011-01-31",
+          "PostNr": "49252",
+          "Postort": "Byn",
+          "Utdelningsadress1": Object {
+            "Lagenhet": undefined,
+            "Trappor": undefined,
+            "Utdelningsadress": "",
+          },
+          "Utdelningsadress2": Object {
+            "Lagenhet": "1612",
+            "Trappor": undefined,
+            "Utdelningsadress": "STIGEN 152",
+          },
+        },
+      ],
+      "PersonId": Array [
+        Object {
+          "FysiskPersonId": "198904079558",
+        },
+      ],
+      "Persondetaljer": Array [
+        Object {
+          "Aviseringsnamn": "",
+          "Avregistreringsdatum": "",
+          "AvregistreringsorsakKod": "",
+          "DatumFrom": "2009-09-10",
+          "DatumTill": null,
+          "Efternamn": "Efternamn",
+          "Fodelsetid": "1989-04-07",
+          "Fornamn": Array [
+            "Fornamn",
+            "Tilltalsnamn",
+          ],
+          "HanvisningspersonNrByttFran": "",
+          "HanvisningspersonNrByttTill": "",
+          "Kon": "M",
+          "Tilltalsnamn": "Tilltalsnamn",
+        },
+      ],
+      "SekretessAndringsdatum": "",
+      "Sekretessmarkering": "N",
+      "SenasteAndringSPAR": "2016-08-30",
+    },
+  ],
+  "Undantag": Array [],
+}
+`;

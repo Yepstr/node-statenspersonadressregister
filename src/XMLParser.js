@@ -11,13 +11,13 @@ const getDate = (dateStr) => {
 
 /**
  * Given an array of Objects, get the current.
- * It's the one with no `DatumTom`.
+ * It's the one with no `DatumTill`.
  * @return {Object}
  */
 const getCurrent = (objects) => {
   let current = null;
   objects.some((object) => {
-    if (object.DatumTom === null) {
+    if (object.DatumTill === null) {
       current = object;
 
       return true;
@@ -59,7 +59,11 @@ const splitUtdelningsadress = (inUtdelningsadress) => { // esl
 };
 
 class XMLParser {
-  constructor(namespaces = {}) {
+  constructor(namespaces = {
+    'spain': 'http://skatteverket.se/spar/instans/1.0',
+    'spako': 'http://skatteverket.se/spar/komponent/1.0',
+    'SOAP-ENV': 'http://schemas.xmlsoap.org/soap/envelope/',
+  }) {
     this.select = xpath.useNamespaces(namespaces);
   }
 
@@ -87,21 +91,21 @@ class XMLParser {
       .map((persondetaljer) => this.parsePersondetaljer(persondetaljer));
     const AktuellPersondetaljer = getCurrent(Persondetaljer);
 
-    const Adress = this.select('spako:Adress', personsokningSvarsPostNode)
-      .map((address) => this.parseAddress(address));
-    const AktuellAdress = getCurrent(Adress);
+    const Folkbokforingsadresser = this.select('//spako:Folkbokforingsadress', personsokningSvarsPostNode)
+      .map((address) => this.parseFolkbokforingsadress(address));
+    const AktuellFolkbokforingsadress = getCurrent(Folkbokforingsadresser);
 
     return {
       PersonId,
 
       Sekretessmarkering: getString('Sekretessmarkering'),
       SekretessAndringsdatum: getDate(getString('SekretessAndringsdatum')),
-      SenasteAndringFolkbokforing: getDate(getString('SenasteAndringFolkbokforing')),
+      SenasteAndringSPAR: getDate(getString('SenasteAndringSPAR')),
 
       Persondetaljer,
       AktuellPersondetaljer,
-      Adress,
-      AktuellAdress,
+      Folkbokforingsadresser,
+      AktuellFolkbokforingsadress,
     };
   }
 
@@ -141,7 +145,7 @@ class XMLParser {
 
     return {
       DatumFrom: getDate(getString('DatumFrom')),
-      DatumTom: getDate(getString('DatumTom')),
+      DatumTill: getDate(getString('DatumTill')),
       Fornamn: fornamns,
       Tilltalsnamn: tilltalsnamn,
       Efternamn: getString('Efternamn'),
@@ -155,29 +159,12 @@ class XMLParser {
     };
   }
 
-  parseAddress(node) {
-    const getString = this._getStringCreator(node);
-
-    const FolkbokforingsadressNodes = this.select('spako:Folkbokforingsadress', node);
-    const UtlandsadressNodes = this.select('spako:Utlandsadress', node);
-
-    const Folkbokforingsadress = FolkbokforingsadressNodes.map(
-      (FolkbokforingsadressNode) => this.parseFolkbokforingsadress(FolkbokforingsadressNode));
-    const Utlandsadress = UtlandsadressNodes.map(
-      (UtlandsadressNode) => this.parseUtlandsadress(UtlandsadressNode));
-
-    return {
-      DatumFrom: getDate(getString('DatumFrom')),
-      DatumTom: getDate(getString('DatumTom')),
-      Folkbokforingsadress,
-      Utlandsadress,
-    };
-  }
-
   parseFolkbokforingsadress(node) {
     const getString = this._getStringCreator(node);
 
     return {
+      DatumFrom: getDate(getString('DatumFrom')),
+      DatumTill: getDate(getString('DatumTill')),
       CareOf: getString('CareOf'),
       DistriktKod: getString('DistriktKod'),
       FolkbokfordKommunKod: getString('FolkbokfordKommunKod'),

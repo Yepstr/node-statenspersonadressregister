@@ -6,7 +6,7 @@ Information on how to gain access to this service can be read on the SPAR websit
 ## Requirements
 Make sure you have your certificate from Steria and the account information you need to access the test servers
 
-Only tested on node 4.6
+Only tested on node 4
 
 
 ### cURL
