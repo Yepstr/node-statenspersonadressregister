@@ -6,31 +6,14 @@ Information on how to gain access to this service can be read on the SPAR websit
 ## Requirements
 Make sure you have your certificate from Steria and the account information you need to access the test servers
 
-Only tested on node 4
-
-
-### cURL
-This library uses cURL with PEM certificates to talk to SPAR. If you have a OSX
-you can't use the cURL that ships with OSX, you have to recompile it to use openSSL.
-You can do that using `homebrew`:
-```
-brew install curl --with-openssl && brew link curl --force
-```
-
-### Convert certificate
-The certificate from Steria need to be converted to a format that we can use with `cURL`.
-```
-openssl pkcs12 -in cert.p12 -clcerts -nodes -out cert.crt
-```
-
 ## Usage
-
 Make sure your project depend on `node-statenspersonadressregister` and then:
 
 ```
 import SPAR from 'spar';
 const SPAR_OPTIONS = {
-  certPath: '', // file path to the certificates that was converted
+  certPath: '', // file path to the certificate from Steria [cert.p12]
+  passphrase: '', // The passphrase for the certificate
   kundNr: '', // From SPAR
   orgNr: '', // From SPAR,
   slutAnvandarId: '', // From SPAR,

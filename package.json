@@ -14,12 +14,13 @@
   "license": "MIT",
   "dependencies": {
     "moment": "^2.18.1",
-    "node-libcurl": "^1.1.0",
+    "request": "^2.81.0",
     "xml": "^1.0.1",
     "xmldom": "^0.1.22",
     "xpath": "^0.0.24"
   },
   "devDependencies": {
+    "@yepstr/eslint-config-yepstr": "1.0.2",
     "babel-cli": "^6.24.1",
     "babel-jest": "^20.0.3",
     "babel-preset-env": "^1.5.1",

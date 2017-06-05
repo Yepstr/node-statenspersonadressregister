@@ -1,10 +1,12 @@
-import { Curl } from 'node-libcurl';
+import fs from 'fs';
+import request from 'request';
 
 import XMLParser from './XMLParser';
 import XMLFormatter from './XMLFormatter';
 
 const DEFAULT_CONFIG = {
   certPath: '',
+  passphrase: '',
   baseUrl: 'https://kt-ext-ws.statenspersonadressregister.se/spar-webservice/SPARPersonsokningService/20160213',
   kundNr: '',
   orgNr: '',
@@ -15,6 +17,7 @@ const DEFAULT_CONFIG = {
 class SPAR {
   constructor(config, { parser = null, formatter = null } = {}) {
     this.config = Object.assign({}, DEFAULT_CONFIG, config);
+    this.certificate = fs.readFileSync(this.config.certPath);
 
     if (parser === null) {
       this.parser = new XMLParser();
@@ -53,60 +56,27 @@ class SPAR {
   }
 
   soapCall(envelope) {
-    const { verbose } = this.config;
+    const { verbose, baseUrl, passphrase } = this.config;
+
+    const options = {
+      url: baseUrl,
+      agentOptions: {
+        pfx: this.certificate,
+        passphrase: passphrase,
+      },
+      contentType: 'text/xml; charset=utf-8',
+      body: envelope,
+    };
 
     return new Promise((resolve, reject) => {
-      const curl = this._getCurl();
-      curl.setOpt(Curl.option.HTTPHEADER, [
-        'SOAPAction: ""',
-        'Content-type: text/xml; charset=utf-8',
-      ]);
-      curl.setOpt(Curl.option.POSTFIELDS, envelope);
-
-      curl.on('end', (code, body, headers) => {
-        if (verbose) {
-          console.log('END', code, body, headers);
-        }
-        resolve(body);
-      });
-
-      curl.on('error', (error) => {
-        if (verbose) {
-          console.log('ERROR', error);
-        }
-        reject(error);
-      });
-
-      curl.on('data', (...args) => {
-        if (verbose) {
-          console.log('DATA', args);
+      request.post(options, (err, res, body) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(body);
         }
       });
-
-      curl.on('headers', (...args) => {
-        if (verbose) {
-          console.log('DATA', args);
-        }
-      });
-
-      curl.perform();
     });
-  }
-
-  _getCurl(endpoint = '') {
-    const { baseUrl, certPath, verbose } = this.config;
-
-    const url = `${ baseUrl }${ endpoint }`;
-
-    const curl = new Curl();
-    curl.setOpt(Curl.option.SSLCERT, certPath);
-    curl.setOpt(Curl.option.SSL_VERIFYPEER, 0);
-    curl.setOpt(Curl.option.URL, url);
-    if (verbose) {
-      curl.setOpt(Curl.option.VERBOSE, true);
-    }
-
-    return curl;
   }
 
   _validateConfig(/* config */) {
