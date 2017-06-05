@@ -5,6 +5,7 @@
   "main": "./lib",
   "scripts": {
     "test": "jest",
+    "prebuild": "rimraf lib",
     "build": "babel src --out-dir lib --ignore **/*.test.js",
     "prepublish": "npm run build",
     "lint": "eslint src"
@@ -23,7 +24,8 @@
     "babel-jest": "^20.0.3",
     "babel-preset-env": "^1.5.1",
     "eslint-plugin-jest": "~20.0.3",
-    "jest": "^20.0.4"
+    "jest": "^20.0.4",
+    "rimraf": "^2.6.1"
   },
   "repository": {
     "type": "git",
